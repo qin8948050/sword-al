@@ -1,10 +1,11 @@
 package main
 
 import (
+	"fmt"
 	"sword-al/tree"
 )
 
 func main() {
-	root:=tree.InitTree()
-	tree.PostTraverse(root)
+	result:=tree.Parse(1234567)
+	fmt.Println(result)
 }
