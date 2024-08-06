@@ -6,5 +6,5 @@ import (
 
 func main() {
 	root:=tree.InitTree()
-	tree.InTraverse(root)
+	tree.PostTraverse(root)
 }

@@ -32,6 +32,14 @@ func (s *Stack) Pop() *TreeNode {
 	return n
 }
 
+func (s *Stack) Top() *TreeNode {
+	var result *TreeNode
+	if len(s.Data) > 0 {
+		result = s.Data[len(s.Data)-1]
+	}
+	return result
+}
+
 func InitTree() *TreeNode {
 	root := &TreeNode{Value: 1}
 	root.Left = &TreeNode{Value: 2}
@@ -78,4 +86,28 @@ func InTraverse(root *TreeNode) {
 			node = n.Right
 		}
 	}
+}
+
+func PostTraverse(root *TreeNode) {
+	if root == nil {
+		return
+	}
+	stack := &Stack{}
+	lastVisited := new(TreeNode)
+	current := root
+	for current != nil || !stack.Empty() {
+		if current != nil {
+			stack.Push(current)
+			current = current.Left
+		} else {
+			peekNode := stack.Top()
+			if peekNode.Right != nil && peekNode.Right != lastVisited {
+				current = peekNode.Right
+			} else {
+				fmt.Println(peekNode.Value)
+				lastVisited = stack.Pop()
+			}
+		}
+	}
+
 }
