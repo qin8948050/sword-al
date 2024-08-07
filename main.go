@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"sword-al/tree"
+	"sword-al/string"
 )
 
 func main() {
-	result:=tree.Parse(1234567)
+	result:=string.Parse1(-1234567)
 	fmt.Println(result)
 }
