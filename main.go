@@ -2,10 +2,15 @@ package main
 
 import (
 	"fmt"
-	"sword-al/string"
+	"sword-al/stack"
 )
 
 func main() {
-	result:=string.Parse1(-1234567)
-	fmt.Println(result)
+	q:=stack.Stack{}
+	q.Push(1)
+	q.Push(2)
+	q.Push(3)
+	fmt.Println(q.Pop())
+	fmt.Println(q.Pop())
+	fmt.Println(q.Pop())
 }

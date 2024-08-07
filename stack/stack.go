@@ -36,23 +36,15 @@ func(s *Stack)Push(d int)  {
 }
 
 func(s *Stack)Pop() int{
-	if len(s.Queue1)==0 && len(s.Queue2)==0 {
-		return 0
+	if len(s.Queue1)==0  {
+		panic("stack empty")
 	}
-	var d int
-	if len(s.Queue1)==0 && len(s.Queue2)>0 {
-		for len(s.Queue2)>0 {
-			d=s.Queue2[0]
-			s.Queue1=append(s.Queue1, d)
-			s.Queue2=s.Queue2[1:]
-		}
-		return d
-	}else {
-		for len(s.Queue1)>0 {
-			d=s.Queue1[0]
-			s.Queue2=append(s.Queue2, d)
-			s.Queue1=s.Queue1[1:]
-		}
-		return d
+	for len(s.Queue1)>1 {
+		s.Queue2=append(s.Queue2, s.Queue1[0])
+		s.Queue1=s.Queue1[1:]
 	}
+	result:=s.Queue1[0]
+	s.Queue1=s.Queue2
+	s.Queue2=s.Queue2[:0]
+	return result
 }
