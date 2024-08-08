@@ -2,15 +2,11 @@ package main
 
 import (
 	"fmt"
-	"sword-al/stack"
+	"sword-al/sort"
 )
 
 func main() {
-	q:=stack.Stack{}
-	q.Push(1)
-	q.Push(2)
-	q.Push(3)
-	fmt.Println(q.Pop())
-	fmt.Println(q.Pop())
-	fmt.Println(q.Pop())
+	input:=[]int{1,1,1,0,1}
+	result:=sort.MinNum(input)
+	fmt.Println(result)
 }
