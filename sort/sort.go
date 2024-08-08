@@ -1,5 +1,6 @@
 package sort
 
+
 // 数字旋转，求最小值。
 func MinNum(input []int) int{
 	if len(input)==0 {
@@ -45,4 +46,26 @@ func Add(n int) int {
 		return 1
 	}
 	return n+Add(n-1)
+}
+
+func Fib(n int) int{
+	if n<=1 {
+		return n
+	}
+	a:=0
+	b:=1
+	var c int
+	for i:=2;i<=n;i++{
+		c=b
+		b=a+b
+		a=c
+	}
+	return b
+}
+
+func FibRecur(n int) int{
+	if n<=1 {
+		return n
+	}
+	return FibRecur(n-1)+FibRecur(n-2)
 }

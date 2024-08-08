@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	result:=sort.Add(5)
+	result:=sort.Fib(1)
 	fmt.Println(result)
 }
