@@ -2,11 +2,10 @@ package main
 
 import (
 	"fmt"
-	"sword-al/container"
+	"sword-al/sort"
 )
 
 func main() {
-  if err:=container.RedisExample();err!=nil {
-	fmt.Errorf(err.Error())
-  }
+	result:=sort.Add(5)
+	fmt.Println(result)
 }

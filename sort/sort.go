@@ -36,3 +36,13 @@ func minInOrder(input []int,head int,tail int) int{
 	}
 	return result
 }
+
+func Add(n int) int {
+	if n==0 {
+		return 0
+	}
+	if n==1 {
+		return 1
+	}
+	return n+Add(n-1)
+}
