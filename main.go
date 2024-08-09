@@ -6,6 +6,6 @@ import (
 )
 
 func main() {
-	result:=bit.ExcelColumnToNumber("AA")
+	result:=bit.CountOnesInBinaryCount(8)
 	fmt.Println(result)
 }
