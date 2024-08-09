@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"sword-al/sort"
+	"sword-al/bit"
 )
 
 func main() {
-	result:=sort.Fib(1)
+	result:=bit.ExcelColumnToNumber("AA")
 	fmt.Println(result)
 }
