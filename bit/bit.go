@@ -16,12 +16,22 @@ func ExcelColumnToNumber(columnLabel string) int {
 	return columnNumber
 }
 
-
+// 计算一个整数的二进制表示中，1的个数
+// 一个整数减去1后的结果，再与原整数做与运算，相等于将整数二进制的最右边1变为0
 func CountOnesInBinaryCount(n int) int {
-	var count int
-	for n>0{
-		count+=n&1
-		n>>=1
+	count := 0
+	for n > 0 {
+		count++
+		n = n & (n - 1)
 	}
 	return count
+}
+
+func IsExponseOfTwo(n int) bool {
+	count := 0
+	for n > 0 {
+		count++
+		n = n & (n - 1)
+	}
+	return count == 1
 }

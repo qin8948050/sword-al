@@ -2,10 +2,11 @@ package main
 
 import (
 	"fmt"
-	"sword-al/bit"
+	"sword-al/integrality"
 )
 
 func main() {
-	result:=bit.CountOnesInBinaryCount(8)
-	fmt.Println(result)
+	data:=[]int{1,2,3,4,5,6}
+	integrality.ReOrder(data)
+	fmt.Println(data)
 }
