@@ -2,7 +2,6 @@ package tree
 
 import (
 	"fmt"
-	"strconv"
 )
 
 
@@ -114,4 +113,31 @@ func PostTraverse(root *TreeNode) {
 		}
 	}
 
+}
+
+func HasSubTree(a *TreeNode,b*TreeNode) bool{
+	var result bool
+	if a!=nil && b!=nil{
+		if a.Value==b.Value{
+			result=HasSubTree2(a,b)
+		}
+		if !result {
+			result=HasSubTree(a.Left,b)
+		}
+		if !result {
+			result=HasSubTree(a.Right,b)
+		}
+	}
+	return result
+}
+
+func HasSubTree2(a *TreeNode,b*TreeNode) bool {
+	if a==nil||b==nil{
+		return true
+	}
+	if a.Value!=b.Value{
+		return false
+	}
+
+	return HasSubTree2(a.Left,b.Left) && HasSubTree2(a.Right,b.Left)
 }

@@ -135,5 +135,9 @@ func Merge(l1 *ListNode,l2 *ListNode) *ListNode{
 	if l1.Value<l2.Value{
 		head=l1
 		head.Next=Merge(l1.Next,l2)
+	}else {
+		head=l2
+		head.Next=Merge(l1,l2.Next)
 	}
+	return head
 }

@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"sword-al/integrality"
+	"sword-al/tree"
 )
 
 func main() {
@@ -22,22 +22,26 @@ func main() {
 	// 	Value: 3,
 	// 	Next: p4,
 	// }
-	p2:=&integrality.ListNode{
-		Value: 2,
-		Next: nil,
-	}
-	p1:=&integrality.ListNode{
-		Value: 1,
-		Next: p2,
-	}
-	p22:=&integrality.ListNode{
-		Value: 2,
-		Next: nil,
-	}
-	p11:=&integrality.ListNode{
-		Value: 1,
-		Next: p22,
-	}
-	result:=integrality.Merge(p1,p11)
+	// p2:=&integrality.ListNode{
+	// 	Value: 2,
+	// 	Next: nil,
+	// }
+	// p1:=&integrality.ListNode{
+	// 	Value: 1,
+	// 	Next: p2,
+	// }
+	// p22:=&integrality.ListNode{
+	// 	Value: 2,
+	// 	Next: nil,
+	// }
+	// p11:=&integrality.ListNode{
+	// 	Value: 1,
+	// 	Next: p22,
+	// }
+	// result:=integrality.Merge(p1,p11)
+	// fmt.Println(result)
+	a:=tree.TreeNode{Left:&tree.TreeNode{Value: 2},Right:nil,Value:1}
+	// b:=tree.TreeNode{Left:nil,Right:nil,Value:1}
+	result:=tree.HasSubTree(&a,nil)
 	fmt.Println(result)
 }
