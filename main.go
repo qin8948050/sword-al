@@ -30,6 +30,14 @@ func main() {
 		Value: 1,
 		Next: p2,
 	}
-	result:=integrality.ReverseList(p1)
-	fmt.Println(*result)
+	p22:=&integrality.ListNode{
+		Value: 2,
+		Next: nil,
+	}
+	p11:=&integrality.ListNode{
+		Value: 1,
+		Next: p22,
+	}
+	result:=integrality.Merge(p1,p11)
+	fmt.Println(result)
 }
