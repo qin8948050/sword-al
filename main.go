@@ -41,7 +41,7 @@ func main() {
 	// result:=integrality.Merge(p1,p11)
 	// fmt.Println(result)
 	a:=tree.TreeNode{Left:&tree.TreeNode{Value: 2},Right:nil,Value:1}
-	// b:=tree.TreeNode{Left:nil,Right:nil,Value:1}
-	result:=tree.HasSubTree(&a,nil)
+	b:=tree.TreeNode{Left:nil,Right:nil,Value:1}
+	result:=tree.HasSubTree(&b,&a)
 	fmt.Println(result)
 }

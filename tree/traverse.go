@@ -132,12 +132,15 @@ func HasSubTree(a *TreeNode,b*TreeNode) bool{
 }
 
 func HasSubTree2(a *TreeNode,b*TreeNode) bool {
-	if a==nil||b==nil{
+	if b==nil{
 		return true
+	}
+	if a==nil {
+		return false
 	}
 	if a.Value!=b.Value{
 		return false
 	}
 
-	return HasSubTree2(a.Left,b.Left) && HasSubTree2(a.Right,b.Left)
+	return HasSubTree2(a.Left,b.Left) && HasSubTree2(a.Right,b.Right)
 }
