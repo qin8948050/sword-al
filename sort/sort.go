@@ -69,3 +69,13 @@ func FibRecur(n int) int{
 	}
 	return FibRecur(n-1)+FibRecur(n-2)
 }
+
+func BubbleSort(data []int) {
+	for i:=0;i<len(data);i++ {
+	for j:=1;j<len(data)-i;j++{
+		if data[j-1]>data[j] {
+			data[j-1],data[j]=data[j],data[j-1]
+		}
+	}
+	}
+}

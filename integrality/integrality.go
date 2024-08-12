@@ -63,8 +63,9 @@ func DeleteNode(head *ListNode,toBeDeleted *ListNode) {
 	}
 }
 
+
 // 将数组上的奇数移动到偶数前
-func ReOrder(data []int) {
+func ReOrder(data []int,judge func(d int) bool) {
 	if len(data)==0 {
 		return
 	}
@@ -72,10 +73,10 @@ func ReOrder(data []int) {
 	tail:=len(data)-1
 	for head<tail {
 
-		for head<tail && data[head]%2!=0{
+		for head<tail && !judge(data[head]){
 			head++
 		}
-		for head<tail && data[tail]%2==0{
+		for head<tail && judge(data[tail]){
 			tail--
 		}
 		if head<tail {
@@ -84,4 +85,41 @@ func ReOrder(data []int) {
 			data[head]=temp
 		}
 	}
+}
+
+// 倒数第K个节点
+func FindTheKNode(head *ListNode,k int) *ListNode {
+	if head==nil ||k<=0{
+		return nil
+	}
+	p1:=head
+
+	for i:=0;i<k;i++{
+		if p1==nil{
+			return nil
+		}
+		p1=p1.Next
+	}
+	p2:=head
+	for p1!=nil{
+		p1=p1.Next
+		p2=p2.Next
+	}
+	return p2
+}
+
+func ReverseList(head *ListNode) *ListNode{
+	current:=head
+	var pReversedHead *ListNode
+	var frontend *ListNode
+	for current!=nil{
+		tail:=current.Next
+		if tail==nil{
+			pReversedHead=current
+		}
+		current.Next=frontend
+		frontend=current
+		current=tail
+	}
+	return pReversedHead
 }
