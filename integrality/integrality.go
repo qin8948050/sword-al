@@ -123,3 +123,17 @@ func ReverseList(head *ListNode) *ListNode{
 	}
 	return pReversedHead
 }
+
+func Merge(l1 *ListNode,l2 *ListNode) *ListNode{
+	if l1==nil {
+		return l2
+	}
+	if l2==nil{
+		return l1
+	}
+	head:=new(ListNode)
+	if l1.Value<l2.Value{
+		head=l1
+		head.Next=Merge(l1.Next,l2)
+	}
+}
