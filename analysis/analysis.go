@@ -13,24 +13,24 @@ func PrintMatrixInCircle(matrix [][]int, rows, columns int) {
 	}
 }
 
-func printMatrixInCircle(matrix [][]int, rows, columns int, start int) {
+func printMatrixInCircle(matrix [][]int,rows,columns,start int) {
 	endX:=columns-start-1
 	endY:=rows-start-1
-	for i:=start;i<=endX;i++{
+	for i := start; i <= endX; i++ {
 		fmt.Println(matrix[start][i])
 	}
 	if start<endY{
-		for i:=start+1;i<=endY;i++{
+		for i := start+1; i <=endY; i++ {
 			fmt.Println(matrix[i][endX])
-		}	
-	}
-	if start<endX && start<endY {
-		for i:=endX-1;i>=start;i--{
-			fmt.Println(matrix[endX][i])
 		}
 	}
-	if start<endX && start<endY-1 {
-		for i:=endY-1;i>=start+1;i--{
+	if start<endX && start<endY{
+		for i := endX-1; i >=start; i-- {
+			fmt.Println(matrix[endY][i])
+		}
+	}
+	if start<endX && start<endY-1{
+		for i := endY-1; i >=start+1; i-- {
 			fmt.Println(matrix[i][start])
 		}
 	}
