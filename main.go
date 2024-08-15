@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-	"sword-al/stack"
+	"sword-al/tree"
 )
 
 func main() {
-	result:=stack.VlidateStackSequences([]int{1,2,3,4,5},[]int{5,4,3,1,2})
+	result:=tree.ValidatePostOrder([]int{1,2},0,0)
 	fmt.Println(result)
 }
 
