@@ -58,3 +58,35 @@ func findPath(node *TreeNode, stacks []*TreeNode, current *int,expected int) {
 	*current-=node.Value
 	stacks=stacks[:len(stacks)-1]
 }
+
+func TreeToListNode(root *TreeNode) *TreeNode{
+	if root==nil ||(root.Left==nil&& root.Right==nil){
+		return root
+	}
+	slice:=make([]*TreeNode,0)
+	TraverseTreeNode(root,&slice)
+	pre:=0
+	post:=pre+1
+	for post<len(slice) {
+	  slice[pre].Right=slice[post]
+	  pre++
+	  post++
+	}
+	post=len(slice)-1
+	pre=post-1
+	for pre>=0 {
+	  slice[post].Left=slice[pre]
+	  post--
+	  pre--
+	}
+	return slice[0]
+}
+
+func TraverseTreeNode(root *TreeNode,slices *[]*TreeNode){
+	if root!=nil{
+		TraverseTreeNode(root.Left,slices)
+		*slices=append(*slices, root)
+		TraverseTreeNode(root.Right,slices)
+	}
+
+}

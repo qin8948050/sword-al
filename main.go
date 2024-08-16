@@ -1,11 +1,12 @@
 package main
 
 import (
+	"fmt"
 	"sword-al/tree"
 )
 
 func main() {
-	node:=&tree.TreeNode{
+/* 	node:=&tree.TreeNode{
 		Left: &tree.TreeNode{
 			Left: &tree.TreeNode{
 				Left: nil,
@@ -25,8 +26,13 @@ func main() {
 			Value: 12,
 		},
 		Value: 10,
+	} */
+	node:=&tree.TreeNode{
+		Left: nil,
+		Right: nil,
+		Value: 1,
 	}
-	tree.FindPath(node,22)
+	fmt.Println(tree.TreeToListNode(node))
 }
 
 
