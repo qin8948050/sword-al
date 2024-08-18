@@ -90,3 +90,37 @@ func TraverseTreeNode(root *TreeNode,slices *[]*TreeNode){
 	}
 
 }
+
+func Spin(root *TreeNode) {
+	if root==nil {
+		return 
+	}
+	currentStack:=[]*TreeNode{root}
+	nextStack:=make([]*TreeNode,0)
+	level:=1
+	for len(currentStack)>0 {
+		node:=currentStack[len(currentStack)-1]
+		currentStack=currentStack[:len(currentStack)-1]
+		fmt.Println(node.Value)
+		if level%2==0 {
+			if node.Left!=nil{
+				nextStack=append(nextStack, node.Left)
+			}
+			if node.Right!=nil{
+				nextStack=append(nextStack, node.Right)
+			}
+		} else {
+			if node.Right!=nil{
+				nextStack=append(nextStack, node.Right)
+			}
+			if node.Left!=nil{
+				nextStack=append(nextStack, node.Left)
+			}
+		}
+		if len(currentStack)==0 {
+			level++
+			currentStack,nextStack=nextStack,currentStack
+			nextStack=nil
+		}
+	}
+}

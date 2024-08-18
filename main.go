@@ -1,38 +1,18 @@
 package main
 
 import (
-	"fmt"
 	"sword-al/tree"
 )
 
 func main() {
-/* 	node:=&tree.TreeNode{
-		Left: &tree.TreeNode{
-			Left: &tree.TreeNode{
-				Left: nil,
-				Right: nil,
-				Value: 4,
-			},
-			Right:&tree.TreeNode{
-				Left: nil,
-				Right: nil,
-				Value: 7,
-			},
-			Value:5,
-		},
-		Right: &tree.TreeNode{
-			Left: nil,
-			Right: nil,
-			Value: 12,
-		},
-		Value: 10,
-	} */
-	node:=&tree.TreeNode{
-		Left: nil,
-		Right: nil,
-		Value: 1,
-	}
-	fmt.Println(tree.TreeToListNode(node))
+    root := &tree.TreeNode{Value: 1}
+    root.Left = &tree.TreeNode{Value: 2}
+    root.Right = &tree.TreeNode{Value: 3}
+    root.Left.Left = &tree.TreeNode{Value: 4}
+    root.Left.Right = &tree.TreeNode{Value: 5}
+    root.Right.Left = &tree.TreeNode{Value: 6}
+    root.Right.Right = &tree.TreeNode{Value: 7}
+	tree.Spin(root)
 }
 
 
