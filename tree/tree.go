@@ -1,6 +1,8 @@
 package tree
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func Image(root *TreeNode) {
 	if root != nil {
@@ -124,3 +126,39 @@ func Spin(root *TreeNode) {
 		}
 	}
 }
+
+func MaxDepth(root *TreeNode) int{
+	if root==nil{
+		return 0
+	}
+	leftDepth:=MaxDepth(root.Left)
+	rightDepth:=MaxDepth(root.Right)
+	if leftDepth>rightDepth {
+		return leftDepth+1
+	}  else {
+		return rightDepth+1
+	}
+}
+
+// 搜索二叉树的第k大元素
+func KMaxNode(root *TreeNode,k int) (int,bool) {
+	var result *TreeNode
+	kMaxNode(root,&result,&k)
+	if result==nil{
+		return 0,false
+	}
+	return result.Value,true
+}
+
+
+ func kMaxNode(root *TreeNode,result **TreeNode,k *int){
+	if root==nil {
+		return
+	}
+	kMaxNode(root.Right,result,k)
+	*k--;
+	if *k==0 {
+		*result=root
+	}
+	kMaxNode(root.Left,result,k)
+ }
