@@ -1,3 +1,7 @@
+package compute_soul
+import "fmt"
+
+
 //方法1：分而治之
 func MaxRange() {
 	start := 0
