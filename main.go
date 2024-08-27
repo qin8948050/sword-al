@@ -1,11 +1,10 @@
 package main
 
 import (
-	"fmt"
+	"sword-al/string"
 )
 
 func main() {
-	start,end,result:=maxSubArray([]int{2,2,3,4})
-	fmt.Println(start,end,result)
+	string.Permutation("abc")
 }
 

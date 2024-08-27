@@ -1,6 +1,9 @@
 package string
 
-import "strconv"
+import (
+	"fmt"
+	"strconv"
+)
 
 // 千分位转换
 func Parse(input int64) string {
@@ -67,4 +70,24 @@ func Parse1(input int64) string {
 	}
 
 	return string(result)
+}
+
+// 字符串全排列
+func Permutation1(rune []rune, begin int) {
+	if begin == len(rune)-1 {
+		fmt.Println(string(rune))
+	}
+	for i := begin; i < len(rune); i++ {
+		rune[begin], rune[i] = rune[i], rune[begin]
+		Permutation1(rune, begin+1)
+		rune[begin], rune[i] = rune[i], rune[begin]
+	}
+}
+
+func Permutation(s string) {
+	if s == "" {
+		return
+	}
+	chars := []rune(s)
+	Permutation1(chars, 0)
 }
