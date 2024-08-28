@@ -92,13 +92,14 @@ func QuickSort(numbers []int,low int,high int) {
 
 func partition(numbers []int,low,high int) int {
 	pivlot:=numbers[high]
-	i:=low-1
+	i:=low
 	for j:=low;j<high;j++{
 		if numbers[j]<pivlot{
-			i++
 			numbers[j],numbers[i]=numbers[i],numbers[j]
+			i++
 		}
 	}
-	numbers[i+1],numbers[high]=pivlot,numbers[i+1]	
-	return i+1
+	//放置枢纽
+	numbers[i],numbers[high]=pivlot,numbers[i]	
+	return i
 }
