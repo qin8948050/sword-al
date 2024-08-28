@@ -5,18 +5,23 @@ import (
 )
 
 func main() {
-	a:=[]int{1,2,1,2,2,3,2}
-	QuickSort(a,1,len(a)-1)
-	fmt.Println(a)
+	a:=[]int{5,1,2,3,4}
+	partitionByRatio(a,0,len(a)-1,2)
+	fmt.Println(a[2])
 }
 
-func QuickSort(numbers []int,low int,high int) {
-	if low < high{
-		pivlot:=partition(numbers,low,high)
-		QuickSort(numbers,low,pivlot-1)
-		QuickSort(numbers,pivlot+1,high)
+func partitionByRatio(numbers []int,low int,high int,target int){
+	if low<high{
+		leftSubEnd:=partition(numbers,low,high)
+		if leftSubEnd==target{
+			return
+		}
+		if leftSubEnd<target {
+			partitionByRatio(numbers,leftSubEnd+1,high,target)
+		} else {
+			partitionByRatio(numbers,low,leftSubEnd-1,target)
+		}
 	}
-
 }
 
 func partition(numbers []int,low,high int) int {
@@ -31,3 +36,4 @@ func partition(numbers []int,low,high int) int {
 	numbers[i],numbers[high]=numbers[high],numbers[i]	
 	return i
 }
+

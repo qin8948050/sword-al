@@ -103,3 +103,18 @@ func partition(numbers []int,low,high int) int {
 	numbers[i],numbers[high]=pivlot,numbers[i]	
 	return i
 }
+
+//查找中位数
+func partitionByRatio(numbers []int,low int,high int,target int){
+	if low<high{
+		leftSubEnd:=partition(numbers,low,high)
+		if leftSubEnd==target{
+			return
+		}
+		if leftSubEnd<target {
+			partitionByRatio(numbers,leftSubEnd+1,high,target)
+		} else {
+			partitionByRatio(numbers,low,leftSubEnd-1,target)
+		}
+	}
+}
