@@ -79,3 +79,26 @@ func BubbleSort(data []int) {
 	}
 	}
 }
+
+// 快速排序
+func QuickSort(numbers []int,low int,high int) {
+	if low < high{
+		pivlot:=partition(numbers,low,high)
+		QuickSort(numbers,low,pivlot-1)
+		QuickSort(numbers,pivlot+1,high)
+	}
+
+}
+
+func partition(numbers []int,low,high int) int {
+	pivlot:=numbers[high]
+	i:=low-1
+	for j:=low;j<high;j++{
+		if numbers[j]<pivlot{
+			i++
+			numbers[j],numbers[i]=numbers[i],numbers[j]
+		}
+	}
+	numbers[i+1],numbers[high]=pivlot,numbers[i+1]	
+	return i+1
+}
