@@ -5,35 +5,41 @@ import (
 )
 
 func main() {
-	a:=[]int{5,1,2,3,4}
-	partitionByRatio(a,0,len(a)-1,2)
-	fmt.Println(a[2])
+	a:=[]int{7,1,4,3,5,5,9,4,10,25,11,12,33,2,13,6}
+	result:=MaxSubArray(a)
+	fmt.Println(result)
 }
 
-func partitionByRatio(numbers []int,low int,high int,target int){
-	if low<high{
-		leftSubEnd:=partition(numbers,low,high)
-		if leftSubEnd==target{
-			return
-		}
-		if leftSubEnd<target {
-			partitionByRatio(numbers,leftSubEnd+1,high,target)
+func MaxSubArray(numbers []int) []int {
+	if len(numbers)<=0{
+		return numbers
+	}
+	m:=make(map[int]int,0)
+	for i:=0;i<len(numbers);i++ {
+		currentNumber:=numbers[i]
+		if _,ok:=m[currentNumber];ok{
+			continue
+		} else if previousValue,ok:=m[currentNumber-1];ok{
+			m[currentNumber]=previousValue+1
+			delete (m,currentNumber-1)
 		} else {
-			partitionByRatio(numbers,low,leftSubEnd-1,target)
+			m[currentNumber]=1
 		}
 	}
-}
+	maxCount:=0
+	var maxKey int
+    for k,v:=range m {
+		if v>maxCount{
+			maxCount=v
+			maxKey=k
+		}
+	}
 
-func partition(numbers []int,low,high int) int {
-	pivlot:=numbers[high]
-	i:=low
-	for j:=low;j<high;j++{
-		if numbers[j]<pivlot{
-			numbers[j],numbers[i]=numbers[i],numbers[j]
-			i++
-		}
+	result:=make([]int,maxCount)
+	for i:=maxCount-1;i>=0;i-- {
+		result[i]=maxKey
+		maxKey--
 	}
-	numbers[i],numbers[high]=numbers[high],numbers[i]	
-	return i
+	return result
 }
 
