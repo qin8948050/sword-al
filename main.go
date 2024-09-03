@@ -6,47 +6,30 @@ import (
 )
 
 func main() {
-	a:=[][]int{
-		{2,10},
-		{0,5},
-		{8,10},
-	}
-	result:=Merge(a)
+	result := MaxStr("babad")
 	fmt.Println(result)
 }
 
-func BubbleSort(data [][]int) {
-	for i:=0;i<len(data)-1;i++ {
-		for j:=0;j<len(data)-1-i;j++ {
-			if  data[j][0]>data[j+1][0] || (data[j][0]==data[j][0] && data[j][1]>data[j+1][1]){
-				data[j],data[j+1]=data[j+1],data[j]
-			}
+func MaxStr(s string) string {
+	start := 0
+	end := 0
+	for i := 0; i < len(s); i++ {
+		len1 := match(s, i, i)
+		len2 := match(s, i, i+1)
+		maxLength := int(math.Max(float64(len1), float64(len2)))
+		if maxLength > end-start {
+			// maxLength-1表示去掉中心位置后的左右长度
+			start = i - (maxLength-1)/2
+			end = start + maxLength - 1
 		}
 	}
+	return s[start : end+1]
 }
 
-func Merge(ranges [][]int) [][]int{
-	if len(ranges)<=1 {
-		return ranges
+func match(s string, start, end int) int {
+	for start >= 0 && end < len(s) && s[start] == s[end] {
+		start--
+		end++
 	}
-	BubbleSort(ranges)
-	result:=[][]int{{ranges[0][0],ranges[0][1]}}
-	for i:=1;i<len(ranges);{
-		l1:=result[len(result)-1][0]
-		u1:=result[len(result)-1][1]
-		l2:=ranges[i][0]
-		u2:=ranges[i][1]
-		if u1>=l2{
-			sub:=[]int{l1,int(math.Max(float64(u1),float64(u2)))}
-			if len(result)>0 {
-				result=result[:len(result)-1]
-			}
-			result=append(result, sub)
-		}else {
-			result=append(result, []int{l1,u1},[]int{l2,u2})
-		}
-		i++
-	}
-	return result
+	return end - start - 1
 }
-
