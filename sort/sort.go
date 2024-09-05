@@ -120,6 +120,7 @@ func partitionByRatio(numbers []int,low int,high int,target int){
 }
 
 // 个数超过一般的元素
+//方法1：分治
 func MoreThanHalfNum(numbers []int,length int) (int,bool){
 	if !checkNumbersValid(numbers) {
 		return 0,false
@@ -144,6 +145,28 @@ func MoreThanHalfNum(numbers []int,length int) (int,bool){
 
 }
 
+// 方法2：出现次数超过一般的元素，说明比其他元素的次数加起来都多
+func MoreThanHalfNum1(numbers []int) (int,bool){
+	if !checkNumbersValid(numbers) {
+		return 0,false
+	}
+	length:=len(numbers)
+	result:=numbers[0]
+	times:=1
+	for i:=1;i<length;i++ {
+		if numbers[i]==result{
+			times++
+		} else if times>0 {
+			times--
+		} else {
+			result=numbers[i]
+		}
+	}
+	if checkThanHalfNum(numbers,length,result) {
+		return result,true
+	}
+	return 0,false
+}
 func checkNumbersValid(numbers []int) bool {
 	if numbers==nil ||len(numbers)<=0 {
 		return false
