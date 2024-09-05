@@ -118,3 +118,47 @@ func partitionByRatio(numbers []int,low int,high int,target int){
 		}
 	}
 }
+
+// 个数超过一般的元素
+func MoreThanHalfNum(numbers []int,length int) (int,bool){
+	if !checkNumbersValid(numbers) {
+		return 0,false
+	}
+	mid:=length>>1
+	start:=0
+	end:=length-1
+	index:=partition(numbers,start,end)
+	for index!=mid {
+		if index>mid {
+			end=index-1
+		} else {
+			start=index+1
+		}
+		index=partition(numbers,start,end)
+	}
+	midNumber:=numbers[mid]
+	if checkThanHalfNum(numbers,length,midNumber) {
+		return midNumber,true
+	}
+	return 0,false
+
+}
+
+func checkNumbersValid(numbers []int) bool {
+	if numbers==nil ||len(numbers)<=0 {
+		return false
+	}
+	return true
+}
+
+
+
+func checkThanHalfNum(numbers []int,length int,midNumber int) bool {
+	var times int
+	for i:=0;i<length;i++ {
+		if numbers[i]==midNumber {
+			times++
+		}
+	}
+	return times>length/2
+}
