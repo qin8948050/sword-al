@@ -188,7 +188,7 @@ func checkThanHalfNum(numbers []int,length int,midNumber int) bool {
 
 
 
-// 最大子序列和
+// 最大子序列和，方法1
 func MaxSubArraySum(numbers []int) ([]int,int) {
 	if len(numbers)<=0{
 		return nil,0
@@ -210,4 +210,22 @@ func MaxSubArraySum(numbers []int) ([]int,int) {
 		}
 	}
 	return numbers[start:end+1],maxSum
+}
+
+//  最大子序列和,方法2
+func maxSubArraySum1(numbers []int) int {
+	dp:=make([]int,len(numbers))
+	dp[0]=numbers[0]
+	maxResult:=0
+	for i:=1;i<len(numbers);i++ {
+		if dp[i-1]<0 {
+			dp[i]=numbers[i]
+		} else {
+			dp[i]=dp[i-1]+numbers[i]
+		}
+		if maxResult<dp[i] {
+			maxResult=dp[i]
+		}
+	}
+	return maxResult
 }
