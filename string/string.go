@@ -2,7 +2,9 @@ package string
 
 import (
 	"fmt"
+	"sort"
 	"strconv"
+	"strings"
 )
 
 // 千分位转换
@@ -90,4 +92,23 @@ func Permutation(s string) {
 	}
 	chars := []rune(s)
 	Permutation1(chars, 0)
+}
+
+
+// 数组中最小组合
+func MinNumber(nums []int) string {
+   strs:=[]string{}
+   for i:=0;i<len(nums);i++ {
+      strs=append(strs, strconv.Itoa(nums[i]))
+   }
+   sort.Slice(strs,func(i, j int) bool {
+      return compare(strs[i],strs[j])
+   })
+   result:=strings.Join(strs,"")
+   return result
+}
+
+
+func compare(str1 string,str2 string) bool{
+   return str1+str2<str2+str1
 }
