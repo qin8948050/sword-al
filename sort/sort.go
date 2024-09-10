@@ -229,3 +229,54 @@ func maxSubArraySum1(numbers []int) int {
 	}
 	return maxResult
 }
+
+
+
+// 获取丑数的函数,动态规划，空间换时间
+func GetUglyNumber_Solution2(index int) int {
+    if index <= 0 {
+        return 0
+    }
+
+    // 创建一个数组来存储丑数
+    uglyNumbers := make([]int, index)
+    uglyNumbers[0] = 1
+    nextUglyIndex := 1
+
+    // 三个指针分别指向当前需要乘以2，3，5的最小丑数
+    pMultiply2 := 0
+    pMultiply3 := 0
+    pMultiply5 := 0
+
+    // 循环生成丑数
+    for nextUglyIndex < index {
+        min:=Min(uglyNumbers[pMultiply2]*2,uglyNumbers[pMultiply3]*3,uglyNumbers[pMultiply5]*5)
+        uglyNumbers[nextUglyIndex]=min
+        
+        if uglyNumbers[pMultiply2]*2==min{
+            pMultiply2++
+        }
+        if uglyNumbers[pMultiply3]*3==min{
+            pMultiply3++
+        }
+        if uglyNumbers[pMultiply5]*5==min{
+            pMultiply5++
+        }
+        nextUglyIndex++
+    }
+
+    // 返回生成的丑数
+    return uglyNumbers[nextUglyIndex-1]
+}
+
+// 找最小值的辅助函数
+func Min(a, b, c int) int {
+    min := a
+    if b < min {
+        min = b
+    }
+    if c < min {
+        min = c
+    }
+    return min
+}
