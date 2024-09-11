@@ -2,11 +2,11 @@ package main
 
 import (
 	"fmt"
-
 )
 
 func main() {
-   result:=GetUglyNumber_Solution2(100)
+   result:=CountOfInversePair([]int{7,5,6,4},0,3)
    fmt.Println(result)
 }
+
 

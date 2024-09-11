@@ -280,3 +280,46 @@ func Min(a, b, c int) int {
     }
     return min
 }
+
+
+//逆序组数量：归并排序，分治思想
+func CountOfInversePair(numbers []int,start,end int) int {
+   if start>=end{
+      return 0
+   }
+   mid:=(start+end)/2
+   //左、右序列逆序组数量
+   count:=CountOfInversePair(numbers,start,mid)+CountOfInversePair(numbers,mid+1,end)
+   //跨左右序列逆序组数量
+   count+=Merge(numbers,start,mid,end)
+   return count
+}
+
+func Merge(numbers []int,start,mid,end int)int {
+   if start>=end {
+      return 0
+   }
+   i:=start
+   j:=mid+1
+   arrs:=make([]int,0)
+   count:=0
+   for i<=mid&&j<=end {
+      if numbers[i]<numbers[j] {
+         arrs = append(arrs, numbers[i])
+         i++
+      } else {
+         arrs = append(arrs, numbers[j])
+	   //计算逆序组数量，左子数组是排序好的，因此从 i 到 mid 的所有元素都比 arr[j] 大，这些元素都与 arr[j] 形成逆序对
+         count+=(mid-i+1)
+         j++
+      }
+   }
+   arrs=append(arrs, numbers[i:mid+1]...)
+   arrs=append(arrs, numbers[j:end+1]...)
+   k:=0
+   for i:=start;i<=end;i++ {
+      numbers[i]=arrs[k]
+      k++
+   }
+   return count
+}
