@@ -35,3 +35,24 @@ func IsExponseOfTwo(n int) bool {
 	}
 	return count == 1
 }
+
+// 数组中只出现一次的两个数，其他都出现两次
+func FindTwoSingleNumbers(numbers []int) (int,int) {
+   xor:=0
+   for _,n:=range numbers {
+      xor^=n
+   }
+   //将数分为两组
+   diff:=xor&(-xor)
+   num1:=0
+   num2:=0
+   for _,n:=range numbers {
+      //1组
+      if n & diff==1 {
+         num1^=n
+      } else {
+         num2^=n
+      }
+   }
+   return num1,num2
+}
