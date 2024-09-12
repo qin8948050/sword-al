@@ -162,3 +162,40 @@ func KMaxNode(root *TreeNode,k int) (int,bool) {
 	}
 	kMaxNode(root.Left,result,k)
  }
+
+
+// 判断是否为平衡二叉树
+func isBalanced(root *TreeNode) bool {
+    return checkDepth(root) != -1
+}
+
+func checkDepth(node *TreeNode) int {
+    if node == nil {
+        return 0
+    }
+    
+
+    leftDepth := checkDepth(node.Left)
+    rightDepth := checkDepth(node.Right)
+
+    if abs(rightDepth-leftDepth)>1 {
+        return -1
+    }
+    return max(leftDepth, rightDepth) + 1
+}
+
+// 返回两个整数的较大值
+func max(a, b int) int {
+    if a > b {
+        return a
+    }
+    return b
+}
+
+// 返回整数的绝对值
+func abs(a int) int {
+    if a < 0 {
+        return -a
+    }
+    return a
+}
