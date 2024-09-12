@@ -323,3 +323,56 @@ func Merge(numbers []int,start,mid,end int)int {
    }
    return count
 }
+
+
+// 计算某个元素在数组中出现的次数
+func CountOfNumber(numbers []int,input int) int {
+   length:=len(numbers)
+   if length<=0 {
+      return 0
+   }
+   start:=CountFirstIndex(numbers,input,0,length-1)
+   end:=CountLastIndex(numbers,input,0,length-1)
+   return end-start+1
+}
+
+func CountFirstIndex(numbers []int,k int,start int,end int) int {
+   if start>end{
+      return -1
+   }
+   mid:=(start+end)/2
+   midNumber:=numbers[mid]
+   if midNumber==k {
+      if (mid>0&&numbers[mid-1]!=k) || mid==0{
+         return mid
+      } else {
+         end=mid-1
+      }
+   } else if midNumber>k {
+      end=mid-1
+   } else {
+      start=mid+1
+   }
+   return CountFirstIndex(numbers,k,start,end)
+}
+
+
+func CountLastIndex(numbers []int,k int,start int,end int) int {
+   if start>end{
+      return -1
+   }
+   mid:=(start+end)/2
+   midNumber:=numbers[mid]
+   if midNumber==k {
+      if (mid<len(numbers)&&numbers[mid+1]!=k) || mid==len(numbers)-1{
+         return mid
+      } else {
+         start=mid+1
+      }
+   } else if midNumber>k {
+      end=mid-1
+   } else {
+      start=mid+1
+   }
+   return CountLastIndex(numbers,k,start,end)
+}
