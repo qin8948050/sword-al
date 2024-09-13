@@ -112,3 +112,29 @@ func MinNumber(nums []int) string {
 func compare(str1 string,str2 string) bool{
    return str1+str2<str2+str1
 }
+
+
+//翻转单词顺序
+func TraverseString(strs string) string{
+   chars:=[]rune(strs)
+   Reverse(chars,0,len(strs)-1)
+   start:=0
+   end:=0
+   for end<len(chars) {
+      if chars[end]==' '{
+         Reverse(chars,start,end-1)
+         start=end+1
+      } 
+      end++
+   }
+   Reverse(chars,start,len(chars)-1)
+   return string(chars)
+}
+
+func Reverse(str []rune,start int,end int){
+   for start<end {
+      str[start],str[end]=str[end],str[start]
+      start++
+      end--
+   }
+}
