@@ -138,3 +138,17 @@ func Reverse(str []rune,start int,end int){
       end--
    }
 }
+
+
+func LeftTraverseString(strs string,input int) string{
+   if input<0||input>=len(strs) {
+      return strs
+   }
+   chars:=[]rune(strs)
+   length:=len(chars)
+   end:=length-1
+   Reverse(chars,0,end)
+   Reverse(chars,0,end-input)
+   Reverse(chars,end-input+1,end)
+   return string(chars)
+}
