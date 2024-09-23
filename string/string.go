@@ -1,10 +1,13 @@
 package string
 
 import (
+	"errors"
 	"fmt"
+	"math"
 	"sort"
 	"strconv"
 	"strings"
+	"unicode"
 )
 
 // 千分位转换
@@ -151,4 +154,45 @@ func LeftTraverseString(strs string,input int) string{
    Reverse(chars,0,end-input)
    Reverse(chars,end-input+1,end)
    return string(chars)
+}
+
+
+// 字符串转为整数
+func MyAtoi(s string) (int, error) {
+	// 去掉前后的空格
+	s = strings.TrimSpace(s)
+	if len(s) == 0 {
+		return 0, errors.New("invalid input")
+	}
+
+	// 处理正负号
+	sign := 1
+	startIndex := 0
+	if s[0] == '-' {
+		sign = -1
+		startIndex = 1
+	} else if s[0] == '+' {
+		startIndex = 1
+	}
+
+	result := 0
+	for i := startIndex; i < len(s); i++ {
+		if !unicode.IsDigit(rune(s[i])) {
+			return 0, errors.New("invalid character encountered")
+		}
+		// 将字符转换为对应的数字
+		digit := int(s[i] - '0')
+
+		// 检查是否溢出（假设是32位int范围）
+		if result > (math.MaxInt-digit)/10 {
+			if sign == 1 {
+				return math.MaxInt, nil // 正数溢出
+			} else {
+				return -math.MaxInt, nil // 负数溢出
+			}
+		}
+		result = result*10 + digit
+	}
+
+	return result * sign, nil
 }
