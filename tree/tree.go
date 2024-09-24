@@ -199,3 +199,61 @@ func abs(a int) int {
     }
     return a
 }
+
+
+
+// 递归查找两个节点的最低公共祖先
+func LowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
+	// 如果当前节点是 nil，或者当前节点等于 p 或 q，则直接返回当前节点
+	if root == nil || root == p || root == q {
+		return root
+	}
+
+	// 递归在左子树和右子树中查找
+	left := LowestCommonAncestor(root.Left, p, q)
+	right := LowestCommonAncestor(root.Right, p, q)
+
+	// 如果左子树和右子树都能找到 p 或 q，说明当前节点是 LCA
+	if left != nil && right != nil {
+		return root
+	}
+
+	// 如果只有一侧找到 p 或 q，返回该侧的结果
+	if left != nil {
+		return left
+	}
+	return right
+}
+
+// 非递归查找两个节点的最低公共祖先
+func findPath1(root *TreeNode,paths *[]*TreeNode,target *TreeNode) bool {
+   if root==nil {
+      return false
+   }
+   *paths = append(*paths, root)
+
+   if root==target {
+      return true
+   }
+
+   if findPath1(root.Left,paths,target)||findPath1(root.Right,paths,target) {
+      return true
+   }
+   *paths=(*paths)[:len(*paths)-1]
+   return false
+}
+
+func LowestCommonAncestor1(root *TreeNode,p *TreeNode,q *TreeNode) *TreeNode {
+   pathP:=make([]*TreeNode,0)
+   pathQ:=make([]*TreeNode,0)
+   if !findPath1(root,&pathP,p)||!findPath1(root,&pathQ,q) {
+      return nil
+   }
+
+   for i:=0;i<len(pathP)&&i<len(pathQ);i++ {
+      if pathP[i]==pathQ[i] {
+         return pathP[i]
+      }
+   }
+   return nil
+}
