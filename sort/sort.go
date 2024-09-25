@@ -376,3 +376,22 @@ func CountLastIndex(numbers []int,k int,start int,end int) int {
    }
    return CountLastIndex(numbers,k,start,end)
 }
+
+/* 数组中重复的数字
+https://github.com/CyC2018/CS-Notes/blob/master/notes/3.%20%E6%95%B0%E7%BB%84%E4%B8%AD%E9%87%8D%E5%A4%8D%E7%9A%84%E6%95%B0%E5%AD%97.md
+*/
+func DuplicateNumbers(numbers []int) []int {
+	result:=make([]int,0)
+	for i := 0; i < len(numbers); i++ {
+		//向后遍历元素与前面已排序好的元素做对比
+		for numbers[i] != i {
+			loc:=numbers[i]
+			if  loc==numbers[loc]{
+				result = append(result, loc)
+				break
+			}
+			numbers[i], numbers[loc] = numbers[loc],numbers[i]
+		}
+	}
+	return result
+}
