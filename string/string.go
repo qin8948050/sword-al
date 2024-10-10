@@ -196,3 +196,27 @@ func MyAtoi(s string) (int, error) {
 
 	return result * sign, nil
 }
+
+
+
+// 正则匹配
+func IsMatch(s string, p string) bool {
+    // 如果模式为空，只有字符串也为空时才匹配
+    if p == "" {
+        return s == ""
+    }
+
+    // 判断首字符是否匹配（不为空且字符相同或模式是 '.'）
+    firstMatch := (s != "" && (s[0] == p[0] || p[0] == '.'))
+
+    // 如果模式的第二个字符是 '*'，那么有两种处理方法：
+    if len(p) >= 2 && p[1] == '*' {
+        // 1. 忽略模式中的 'x*'（即匹配 0 次），继续递归匹配 s 和 p[2:]
+        // 2. 如果首字符匹配，继续递归匹配 s[1:] 和 p（即 x* 代表多个 x）
+        return (IsMatch(s, p[2:]) || (firstMatch && IsMatch(s[1:], p)))
+    } else {
+        // 如果第二个字符不是 '*'
+        // 如果首字符匹配，则继续递归匹配剩下的部分 s[1:] 和 p[1:]
+        return firstMatch && IsMatch(s[1:], p[1:])
+    }
+}
