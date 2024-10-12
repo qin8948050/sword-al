@@ -257,3 +257,44 @@ func LowestCommonAncestor1(root *TreeNode,p *TreeNode,q *TreeNode) *TreeNode {
    }
    return nil
 }
+
+
+
+
+type Node struct {
+	Value int
+	Next  *Node
+}
+
+// 链表中环的入口节点
+func FirstCircleNode(head *Node) *Node {
+	// 快慢指针初始化为链表头部
+	slow, fast := head, head
+
+	// 检测是否有环
+	for fast != nil && fast.Next != nil {
+		slow = slow.Next      // 慢指针走一步
+		fast = fast.Next.Next // 快指针走两步
+
+		// 如果快慢指针相遇，说明有环
+		if slow == fast {
+			break
+		}
+	}
+
+	// 如果没有环
+	if fast == nil || fast.Next == nil {
+		return nil
+	}
+
+	// 将慢指针移回链表头部，快指针保持在相遇点(慢指针从头到环入口与快指针从相遇点到环入口距离相等)
+	slow = head
+	// 两个指针同时走一步，直到再次相遇
+	for slow != fast {
+		slow = slow.Next
+		fast = fast.Next
+	}
+
+	// 相遇的节点就是环的入口
+	return slow
+}
