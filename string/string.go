@@ -220,3 +220,61 @@ func IsMatch(s string, p string) bool {
         return firstMatch && IsMatch(s[1:], p[1:])
     }
 }
+
+
+
+/* 字符流中第一个出现的不重复的字符
+    方法1 
+ */
+func firstNonRepeatingChar(stream string) string {
+	m:=make(map[rune]int)
+	queue:=list.New()
+	for _,c:=range stream{
+		m[c]++
+		queue.PushBack(c)
+		for queue.Len()>0 {
+			front:=queue.Front()
+			if m[front.Value.(rune)]>1 {
+				queue.Remove(front)
+			} else {
+				break
+			}
+		}
+	}
+	if queue.Len()>0 {
+		return string(queue.Front().Value.(rune))
+	} else {
+		return ""
+	}
+}
+
+
+/* 字符流中第一个出现的不重复的字符
+   方法2
+ */
+func firstNonRepeatingChar1(stream string) string {
+	type charCount struct{
+		count int
+		index int
+	}
+	m:=make(map[rune]charCount)
+	for index,s:=range stream {
+		if info,found:=m[s];found {
+			m[s]=charCount{count: info.count+1,index:info.index}
+		} else {
+			m[s]=charCount{count: 1,index:index}
+		}
+	}
+
+	firstIndex:=len(stream)
+	for _,info:=range m {
+		if info.count==1 && >info.index<firstIndex {
+			firstIndex=info.index
+		}
+	}
+	if firstIndex<len(stream) {
+		return string(stream[firstIndex])
+	} else {
+		return ""
+	}
+}
