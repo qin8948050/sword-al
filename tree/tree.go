@@ -298,3 +298,38 @@ func FirstCircleNode(head *Node) *Node {
 	// 相遇的节点就是环的入口
 	return slow
 }
+
+
+
+
+type ListNode struct {
+    Val  int
+    Next *ListNode
+}
+
+// 删除有序链表中所有重复出现的节点
+func deleteDuplicates(head *ListNode) *ListNode {
+    // 创建一个虚拟头节点
+    dummy := &ListNode{0, head}
+    prev := dummy // 前一个节点指针
+    current := head
+
+    for current != nil {
+        // 如果当前节点有重复值，则跳过所有重复的节点
+        if current.Next != nil && current.Val == current.Next.Val {
+            // 跳过所有具有相同值的节点
+            for current.Next != nil && current.Val == current.Next.Val {
+                current = current.Next
+            }
+            // 跳过所有重复的节点，直接连接到下一个不重复的节点
+            prev.Next = current.Next
+        } else {
+            // 如果当前节点没有重复，则移动前一个节点指针
+            prev = prev.Next
+        }
+        // 移动到下一个节点
+        current = current.Next
+    }
+
+    return dummy.Next
+}
