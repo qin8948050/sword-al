@@ -1,6 +1,7 @@
 package tree
 
 import (
+	"container/list"
 	"fmt"
 )
 
@@ -332,4 +333,37 @@ func deleteDuplicates(head *ListNode) *ListNode {
     }
 
     return dummy.Next
+}
+
+// 把二叉树打印成多行
+func PrintByRow(root *TreeNode) {
+	if root==nil {
+		return 
+	}
+	queue:=list.New()
+	node:=root
+	queue.PushBack(node)
+	nextLevel:=0
+	toBePrinted:=1
+	for queue.Len()>0 {
+		current:=queue.Front()
+		currentValue:=current.Value.(*TreeNode)
+		fmt.Printf("%v ",currentValue.Value)
+
+		if left:=currentValue.Left;left!=nil {
+				queue.PushBack(left)
+				nextLevel++
+		}
+		if right:=currentValue.Right;right!=nil {
+			queue.PushBack(right)
+			nextLevel++
+		}
+		queue.Remove(current)
+		toBePrinted--
+		if toBePrinted==0 {
+			fmt.Printf("\n")
+			toBePrinted=nextLevel
+			nextLevel=0
+		}
+	}
 }
