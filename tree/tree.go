@@ -335,6 +335,25 @@ func deleteDuplicates(head *ListNode) *ListNode {
     return dummy.Next
 }
 
+func DeleteDuplicates(head *ListNode) *ListNode {
+	dummy:=&ListNode{0,head}
+	pre:=dummy
+	current:=head
+	for current!=nil {
+		if current.Next!=nil && current.Val==current.Next.Val {
+			for current.Next!=nil && current.Val==current.Next.Val {
+				current=current.Next
+			}
+			pre.Next=current.Next
+		} else {
+			pre=pre.Next
+		}
+		current=current.Next
+	}
+	return dummy.Next
+}
+
+
 // 把二叉树打印成多行
 func PrintByRow(root *TreeNode) {
 	if root==nil {
@@ -366,4 +385,25 @@ func PrintByRow(root *TreeNode) {
 			nextLevel=0
 		}
 	}
+}
+
+// 二叉搜索树中的第K个节点
+func FindKthNode(root *TreeNode, k *int) *TreeNode {
+    if root == nil {
+        return nil
+    }
+    
+    // 先遍历左子树
+    if node := FindKthNode(root.Left, k); node != nil {
+        return node
+    }
+    
+    // 访问当前节点
+    *k--
+    if *k == 0 {
+        return root
+    }
+
+    // 最后遍历右子树
+    return FindKthNode(root.Right, k)
 }
