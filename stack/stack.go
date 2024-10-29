@@ -44,8 +44,7 @@ func(s *Stack)Pop() int{
 		s.Queue1=s.Queue1[1:]
 	}
 	result:=s.Queue1[0]
-	s.Queue1=s.Queue2
-	s.Queue2=s.Queue2[:0]
+	s.Queue1, s.Queue2 = s.Queue2, s.Queue1[:0]
 	return result
 }
 
