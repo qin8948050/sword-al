@@ -1,7 +1,21 @@
 package sort
 
+//数字旋转，求最小值。方法1
+func FindMinNumber(numbers []int) int {
+   left:=0
+   right:=len(numbers)-1
+   for left<right {
+      mid:=(left+right)/2
+      if numbers[mid]>numbers[right] {
+         left=mid+1
+      } else {
+         right=mid
+      }
+   }
+   return numbers[left]
+}
 
-// 数字旋转，求最小值。
+// 数字旋转，求最小值。方法2
 func MinNum(input []int) int{
 	if len(input)==0 {
 		panic("input isn't empty")
