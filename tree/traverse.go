@@ -115,23 +115,21 @@ func PostTraverse(root *TreeNode) {
 
 }
 
+// 判断子树
 func HasSubTree(a *TreeNode,b*TreeNode) bool{
-	var result bool
-	if a!=nil && b!=nil{
-		if a.Value==b.Value{
-			result=HasSubTree2(a,b)
-		}
-		if !result {
-			result=HasSubTree(a.Left,b)
-		}
-		if !result {
-			result=HasSubTree(a.Right,b)
-		}
+	if b==nil {
+		return true
 	}
-	return result
+	if a==nil {
+		return false
+	}
+	if a.Value==b.Value && isSubTree(a,b) {
+		return true
+	}
+	return HasSubTree(a.Left,b)||HasSubTree(a.Right,b)
 }
 
-func HasSubTree2(a *TreeNode,b*TreeNode) bool {
+func isSubTree(a *TreeNode,b*TreeNode) bool {
 	if b==nil{
 		return true
 	}
@@ -142,5 +140,5 @@ func HasSubTree2(a *TreeNode,b*TreeNode) bool {
 		return false
 	}
 
-	return HasSubTree2(a.Left,b.Left) && HasSubTree2(a.Right,b.Right)
+	return isSubTree(a.Left,b.Left) && isSubTree(a.Right,b.Right)
 }
