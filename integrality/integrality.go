@@ -124,6 +124,7 @@ func ReverseList(head *ListNode) *ListNode{
 	return pReversedHead
 }
 
+//合并顺序链表
 func Merge(l1 *ListNode,l2 *ListNode) *ListNode{
 	if l1==nil {
 		return l2
@@ -131,13 +132,12 @@ func Merge(l1 *ListNode,l2 *ListNode) *ListNode{
 	if l2==nil{
 		return l1
 	}
-	head:=new(ListNode)
+
 	if l1.Value<l2.Value{
-		head=l1
-		head.Next=Merge(l1.Next,l2)
+		l1.Next=Merge(l1.Next,l2)
+		return l1
 	}else {
-		head=l2
-		head.Next=Merge(l1,l2.Next)
+		l2.Next=Merge(l1,l2.Next)
+		return l2
 	}
-	return head
 }
