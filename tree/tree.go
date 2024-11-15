@@ -14,10 +14,9 @@ func Image(root *TreeNode) {
 }
 
 func ValidatePostOrder(sequeues []int, start, end int) bool {
-	if start > end || start < 0 || end > len(sequeues) {
-		return false
-	}
-	if start == end {
+	// start==end 表示序列中只有一个元素
+	//start>end 表示序列为空，***递归技巧***
+	if start>=end {
 		return true
 	}
 	i := start
