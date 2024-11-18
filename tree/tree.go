@@ -121,8 +121,7 @@ func Spin(root *TreeNode) {
 		}
 		if len(currentStack)==0 {
 			level++
-			currentStack,nextStack=nextStack,currentStack
-			nextStack=nil
+			currentStack,nextStack=nextStack,[]*TreeNode{}
 		}
 	}
 }
