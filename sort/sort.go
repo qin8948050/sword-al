@@ -119,18 +119,19 @@ func partition(numbers []int,low,high int) int {
 }
 
 //查找中位数
-func partitionByRatio(numbers []int,low int,high int,target int){
+func partitionByRatio(numbers []int,low int,high int,target int) int{
 	if low<high{
 		leftSubEnd:=partition(numbers,low,high)
-		if leftSubEnd==target{
-			return
+		if leftSubEnd==target-1{
+			return numbers[leftSubEnd]
 		}
-		if leftSubEnd<target {
-			partitionByRatio(numbers,leftSubEnd+1,high,target)
+		if leftSubEnd<target-1 {
+			return partitionByRatio(numbers,leftSubEnd+1,high,target)
 		} else {
-			partitionByRatio(numbers,low,leftSubEnd-1,target)
+			return partitionByRatio(numbers,low,leftSubEnd-1,target)
 		}
 	}
+	return numbers[low]
 }
 
 // 个数超过一般的元素
