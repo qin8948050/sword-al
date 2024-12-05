@@ -347,6 +347,9 @@ func CountOfNumber(numbers []int,input int) int {
       return 0
    }
    start:=CountFirstIndex(numbers,input,0,length-1)
+   if start<0 {
+	return -1
+   }
    end:=CountLastIndex(numbers,input,0,length-1)
    return end-start+1
 }
@@ -379,7 +382,7 @@ func CountLastIndex(numbers []int,k int,start int,end int) int {
    mid:=(start+end)/2
    midNumber:=numbers[mid]
    if midNumber==k {
-      if (mid<len(numbers)&&numbers[mid+1]!=k) || mid==len(numbers)-1{
+      if (mid+1<len(numbers)-1 && numbers[mid+1]!=k) || mid==len(numbers)-1{
          return mid
       } else {
          start=mid+1
