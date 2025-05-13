@@ -1,5 +1,6 @@
-package main
+package sort
 
+// LRU算法
 type LRUCache struct {
 	Size     int
 	Capacity int
@@ -85,8 +86,4 @@ func (this *LRUCache) Put(key int, value int) {
 		this.Size++
 		this.removeNode()
 	}
-}
-
-func main() {
-
 }
