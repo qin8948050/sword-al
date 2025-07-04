@@ -1,6 +1,8 @@
 module sword-al
 
-go 1.20
+go 1.22.0
+
+toolchain go1.24.0
 
 require github.com/containerd/containerd/v2 v2.0.0-rc.3
 
